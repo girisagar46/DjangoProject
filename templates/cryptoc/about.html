@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About</title>
+</head>
+<body>
+{{ about_us }}
+
+<br>
+My Numbers are:
+<ul>
+    {% for each in numbers %}
+        <li>{{ each }}</li>
+    {% endfor %}
+</ul>
+
+
+
+</body>
+</html>

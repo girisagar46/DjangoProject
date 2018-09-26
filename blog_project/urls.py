@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from cryptoc.views import index, about
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('crypto/', index),
+    path('about/', about),
 ]
