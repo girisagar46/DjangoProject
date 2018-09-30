@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Page</title>
+</head>
+<body>
+    Latest Blogs:
+    <br>
+
+    {% for each in posts %}
+        {{ each.title }}
+        {{ each.text }}
+        {{ each.author.username }}
+        {{ each.published_date }}
+        <hr>
+    {% endfor %}
+
+</body>
+</html>

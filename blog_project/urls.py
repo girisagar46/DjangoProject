@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from cryptoc.views import index, about, currencies, github
+from blog.views import articles
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +25,5 @@ urlpatterns = [
     path('about/', about),
     path('', currencies),
     path('github/', github),
+    path('blog/', articles),
 ]
