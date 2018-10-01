@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Blog Page</title>
-</head>
-<body>
-    Latest Blogs:
-    <br>
+{% extends "snippets/base.html" %}
 
+{% block content %}
     {% for each in posts %}
-        {{ each.title }}
-        {{ each.text }}
-        {{ each.author.username }}
-        {{ each.published_date }}
+        <h1>{{ each.title }}</h1>
+        <small>{{ each.author.username }} | {{ each.published_date }}</small>
+        <p>{{ each.body }}</p>
         <hr>
     {% endfor %}
-
-</body>
-</html>
+{% endblock content %}

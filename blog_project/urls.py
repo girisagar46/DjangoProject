@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('crypto/', index),
     path('about/', about),
-    path('', currencies),
+    path('crypto/', currencies),
     path('github/', github),
-    path('blog/', articles),
+    path('', articles),
 ]

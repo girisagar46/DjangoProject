@@ -3,7 +3,7 @@ from .models import Post
 
 
 def articles(request):
-    posts = Post.objects.filter(is_published=True)
+    posts = Post.objects.filter(is_published=True).order_by('-created_date')
 
     ctx = {
         "posts": posts
