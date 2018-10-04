@@ -6,4 +6,18 @@
     <small>{{ post.author.username }} {{ post.published_date|date:"F d, l, Y - h A" }}</small>
     <p>{{ post.body }}</p>
 
+    <hr>
+    <div class="row">
+        <div class="container">
+            <div class="col-md-6">
+                Comments:
+                {% for each_comment in comments %}
+                    By: {{ each_comment.email }}<br>
+                    Comment: {{ each_comment.comment_body }}
+                    <hr>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
 {% endblock content %}

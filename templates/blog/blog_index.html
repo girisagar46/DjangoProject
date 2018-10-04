@@ -7,9 +7,15 @@
 
 {% block content %}
     {% for each in posts %}
-        <h1>{{ each.title }}</h1>
+
+        <h1><a href="{% url 'blog_detail' each.id %}">{{ each.title }}</a></h1>
+
         <small>{{ each.author.first_name|default:"Default User" }} {{ each.author.username }} | {{ each.published_date|date:"F d, l, Y - h A" }}</small>
-        <p>{{ each.body }}</p>
+        <p>{{ each.body|truncatechars:20 }}
+            <a href="{% url 'blog_detail' each.id %}">
+                <button class="btn btn-sm btn-primary">View More</button>
+            </a>
+        </p>
         <hr>
     {% endfor %}
 {% endblock content %}

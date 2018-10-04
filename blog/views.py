@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Post
+from .models import Post, Comments
 
 
 def articles(request):
@@ -35,8 +35,11 @@ def blog_detail(request, post_id):
     # post = get_object_or_404(Post, id=post_id)
     post = Post.objects.filter(id=post_id).first()
 
+    comments = Comments.objects.filter(post=post)
+
     ctx = {
-        "post": post
+        "post": post,
+        "comments": comments
     }
 
     return render(request, template_name='blog/blog_detail.html', context=ctx)
