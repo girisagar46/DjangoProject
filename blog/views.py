@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Comments
 
@@ -23,7 +24,7 @@ def create_article(request):
 
         post = Post.objects.create(title=title, body=body, author=user, is_published=True)
 
-        return redirect('blog_index')
+        return redirect(to='blog_index')
 
     return render(request,
                   template_name='blog/blog_create.html',
@@ -43,3 +44,18 @@ def blog_detail(request, post_id):
     }
 
     return render(request, template_name='blog/blog_detail.html', context=ctx)
+
+
+def add_comment(request):
+    if request.method == 'POST':
+        email = request.POST.get("email")
+        comment_body = request.POST.get("comment_body")
+        post_id = request.POST.get("post_id")
+
+        post = Post.objects.get(id=post_id)
+
+        comment = Comments.objects.create(email=email,
+                                          comment_body=comment_body,
+                                          post=post)
+
+        return redirect(to='blog_detail', post_id=post_id)

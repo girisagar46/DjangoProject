@@ -6,7 +6,19 @@
     <small>{{ post.author.username }} {{ post.published_date|date:"F d, l, Y - h A" }}</small>
     <p>{{ post.body }}</p>
 
-    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <form action="{% url "add_comment" %}" method="post">
+                {% csrf_token %}
+                <input type="email" placeholder="Enter email address" name="email" class="form-control">
+                <textarea name="comment_body" id="" cols="10" rows="5" class="form-control"></textarea>
+                <input type="hidden" name="post_id" value="{{ post.id }}">
+                <input type="submit" class="btn btn-secondary" value="Comment">
+            </form>
+            <hr>
+        </div>
+    </div>
+
     <div class="row">
         <div class="container">
             <div class="col-md-6">
