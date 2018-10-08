@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView
 
 from .models import CsvData
+from .forms import CsvDataForm
 
 
 # class CsvDataView(View):
@@ -14,3 +15,15 @@ from .models import CsvData
 
 class CsvDataListView(ListView):
     model = CsvData
+
+
+class CsvDataCreateView(CreateView):
+    model = CsvData
+    form_class = CsvDataForm
+
+class CsvDataDetailView(DetailView):
+    model = CsvData
+
+class CsvDataUpdateView(UpdateView):
+    model = CsvData
+    form_class = CsvDataForm

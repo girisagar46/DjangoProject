@@ -1,0 +1,21 @@
+{% extends 'snippets/base.html' %}
+
+{% block content %}
+
+    <table class="table">
+        <tr>
+            <td>Name</td>
+            <td>{{ object.name }}</td>
+        </tr>
+        <tr>
+            <td>ipv4</td>
+            <td>{{ object.ipv4 }}</td>
+        </tr>
+        <tr>
+            <td>Mac Address</td>
+            <td>{{ object.mac_address }}</td>
+        </tr>
+    </table>
+    <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit CsvData</a>
+
+{% endblock content %}
