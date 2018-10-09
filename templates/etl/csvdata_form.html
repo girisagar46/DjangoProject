@@ -1,11 +1,21 @@
 {% extends 'snippets/base.html' %}
 
 {% block content %}
-
+    {% if form.errors %}
+        <ol>
+            {% for error in form.errors %}
+                <li><strong>{{ error|escape }}</strong></li>
+            {% endfor %}
+        </ol>
+    {% endif %}
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button class="btn btn-success" type="submit">Submit</button>
     </form>
-
+    {% if form.instance.pk %}
+        <a class="btn btn-danger" href="{% url 'etl_csvdata_detail' form.instance.pk %}">Cancel</a>
+    {% else %}
+        <a class="btn btn-danger" href="{% url 'csvdata_list' %}">Cancel</a>
+    {% endif %}
 {% endblock content %}

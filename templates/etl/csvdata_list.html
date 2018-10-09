@@ -2,23 +2,29 @@
 
 
 {% block content%}
+    <a class='btn btn-secondary' href="{% url 'upload_csv_file' %}">Upload CSV File</a>
     <table class="table table-striped table-hover">
         <thead>
         <tr>
             <th>Name</th>
             <th>IP Address</th>
             <th>MAC Address</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
         {% for data in object_list %}
             <tr>
-                <td>{{ data.name }}</td>
+                <td><a href="{% url 'etl_csvdata_detail' data.id %}">{{ data.name }}</a></td>
                 <td>{{ data.ipv4 }}</td>
                 <td>{{ data.mac_address }}</td>
+                <td>
+                    <a class="btn btn-danger" href="{% url 'etl_csvdata_delete' data.id %}">Delete</a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
 
     </table>
+    <a class='btn btn-primary' href="{% url 'csvdata_create' %}">Create new Data</a>
 {% endblock content%}
