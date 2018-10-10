@@ -1,5 +1,7 @@
 import csv
+import json
 
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
@@ -33,7 +35,11 @@ class CsvDataUpdateView(UpdateView):
 
 class CsvDataDeleteView(DeleteView):
     model = CsvData
-    success_url = reverse_lazy('csvdata_list')
+    # success_url = reverse_lazy('csvdata_list')
+    def delete(self, request, *args, **kwargs):
+        self.get_object().delete()
+        resp = {"delete":"ok"}
+        return HttpResponse(json.dumps(resp))
 
 
 def upload_process(request):
