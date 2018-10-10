@@ -1,5 +1,6 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse
+from django.shortcuts import render, redirect
+
 from .models import Post, Comments
 
 
@@ -59,3 +60,12 @@ def add_comment(request):
                                           post=post)
 
         return redirect(to='blog_detail', post_id=post_id)
+
+
+def like_post(request, post_id):
+    if request.method == 'POST':
+        post = Post.objects.get(id=post_id)
+        post.num_likes += 1
+        post.save()
+
+        return JsonResponse({"new_likes_count": post.num_likes})
