@@ -1,4 +1,5 @@
 {% extends 'snippets/base.html' %}
+{% load blog_tags %}
 
 {% block content %}
 
@@ -10,6 +11,39 @@
     </small>
     <p>{{ post.body }}</p>
     <small><span class="text-primary" id="likes">{{ post.num_likes }} </span> likes!</small>
+
+    <hr>
+    <div class="card-deck">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">
+                Latest Posts
+            </div>
+            <div class="card-text">
+                {% get_latest 5 %}
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">
+                popular Posts
+            </div>
+            <div class="card-text">
+                <ul>
+                    {% get_popular 5 as popular %}
+                    {% for post in popular %}
+                        <li>
+                            <a href="{% url 'blog_detail' post.id %}">{{ post.title|my_filter }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <hr>
 
     <div class="row">
         <div class="col-md-6">

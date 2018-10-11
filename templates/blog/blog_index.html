@@ -1,11 +1,16 @@
 {% extends "snippets/base.html" %}
+{% load blog_tags %}
 
 
 {% comment %}
     This is the comment for blog posts
 {% endcomment %}
 
+
 {% block content %}
+    <hr>
+    <small>This blog has {% post_count %} blog posts.</small>
+    <hr>
     {% for each in posts %}
 
         <h1><a href="{% url 'blog_detail' each.id %}">{{ each.title }}</a></h1>
