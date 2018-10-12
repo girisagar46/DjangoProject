@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 
@@ -15,7 +16,7 @@ def articles(request):
                   template_name='blog/blog_index.html',
                   context=ctx)
 
-
+@login_required
 def create_article(request):
 
     if request.method == 'POST':
@@ -30,7 +31,6 @@ def create_article(request):
     return render(request,
                   template_name='blog/blog_create.html',
                   context={})
-
 
 def blog_detail(request, post_id):
     #post = Post.objects.get(id=post_id)
@@ -47,6 +47,7 @@ def blog_detail(request, post_id):
     return render(request, template_name='blog/blog_detail.html', context=ctx)
 
 
+@login_required
 def add_comment(request):
     if request.method == 'POST':
         email = request.POST.get("email")
