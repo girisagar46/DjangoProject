@@ -1,5 +1,7 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
 
+from blog.api import PostViewSet
 from blog.views import articles, create_article, blog_detail, add_comment, like_post
 
 urlpatterns = [
@@ -8,4 +10,13 @@ urlpatterns = [
     path('detail/<int:post_id>', blog_detail, name='blog_detail'),
     path('add-comment/', add_comment, name='add_comment'),
     path('like/<int:post_id>', like_post, name='like_post')
+]
+
+
+# API ROUTER
+router = routers.DefaultRouter()
+router.register(r'post', PostViewSet)
+
+urlpatterns += [
+    path('api/v1/', include(router.urls))
 ]

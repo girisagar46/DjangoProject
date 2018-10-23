@@ -1,0 +1,16 @@
+
+1. Install Django rest framework
+    pip install djangorestframework
+
+2. Add django_rest_framework to INSTALLED_APPS
+
+3. Create in APP:
+    a> API endpoint (URL)
+    b> Create Serializer (Like Form) - Create new file (serializers.py)
+    c> Create View for API (api.py)
+
+4. Install django CORS to expose API to 3rd party
+
+5. REST API Documentation: https://www.django-rest-framework.org/
+
+6. Django CORS documentation: https://github.com/ottoyiu/django-cors-headers
