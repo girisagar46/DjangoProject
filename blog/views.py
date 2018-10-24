@@ -1,6 +1,10 @@
 from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMessage
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from django.template.loader import get_template
+
+from django.conf import settings
 
 from .models import Post, Comments
 
@@ -70,3 +74,31 @@ def like_post(request, post_id):
         post.save()
 
         return JsonResponse({"new_likes_count": post.num_likes})
+
+
+def contact_us(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        user_email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        ctx = {
+            "name": name,
+            "email": user_email,
+            "message": message
+        }
+
+        template = get_template('blog/email_template.html')
+        email_html = template.render(context=ctx)
+
+        email = EmailMessage(
+            'Someone sent you a message',
+            email_html,
+            "From My Blog",
+            [settings.EMAIL_HOST_USER],
+            headers={'Reply-To': user_email}
+        )
+        email.content_subtype = 'html'
+        email.send()
+        return redirect(to='contact')
+    return render(request, template_name='blog/contact.html', context={})
